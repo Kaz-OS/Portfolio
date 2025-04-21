@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Mail, Github, Linkedin,  } from '@lucide/astro';
+const socials = [
+  { label: "LinkedIn", icon: Linkedin, link: "https://www.linkedin.com/in/esteban-rattier-226688342/" },
+  { label: "GitHub", icon: Github, link: "https://github.com/Kaz-OS" },
+  { label: "Mail", icon: Mail, link: "mailto:esteban.rattier@campus-la-chataigneraie.org"},
+];
+---
+<Layout>
+	<header>
+		<img src="./src/assets/MainBefore.jpg" alt="Photo de profil">
+		<div class="headerContent">
+			<h1>~ Esteban Rattier ~ </h1>
+			<div class="headerLinks">
+				<a href="/veille">veille</a>
+				<a href="/ERA_TableauDeSynthese.xlsx">rectorat</a>
+			</div>
+		</div>
+	</header>
+	<main>
+		<section class="profil">
+			<h1>Profil</h1>
+			<p>Étudiant en informatique. Actuellement à la recherche d'un stage de 5 semaines (du 26 mai au 27 juin 2025) en développement </br> 
+			   pour valider ma première année de BTS Services Informatiques aux Organisations (SIO). 
+		   </p>
+		   <div class="flex items-center gap-x-2.5">
+			{
+			  socials.map((social) => (
+				<a href={social.link} target="_blank">
+				  <social.icon />
+				</a>
+			  ))
+			}
+		  </div>
+		</section>
+		<h1>Expériences</h1>
+		<section class="Expériences">
+			<div class="1">
+				<h2>GORON ASSI</h2>
+				<h3>Technicien stagiaire</h3>
+				<ul>
+					<li>4 semaines</li>
+					<li>Gestion de réseaux</li>
+				</ul>
+			</div>
+			<div class="2">
+				<h2>DSEM</h2>
+				<h3>Technicien stagiaire</h3>
+				<ul>
+					<li>4 semaines</li>
+					<li>Maintenance d'équipement éléctronique</li>
+				</ul>
+			</div>
+			<div class="3">
+				<h2>PC Solution 76</h2>
+				<h3>Technicien stagiaire</h3>
+				<ul>
+					<li>8 semaines</li>
+					<li>Maintenance d'équipement éléctronique</li>
+				</ul>
+			</div>
+			<div class="4">
+				<h2>Sery OUEST</h2>
+				<h3>Technicien stagiaire</h3>
+				<ul>
+					<li>6 semaines</li>
+					<li>Imprimerie numérique</li>
+				</ul>
+			</div>
+		</section>
+		<section class="Hardskill">
+			<h1>Hard skill</h1>
+		</section>
+	</main>
+</Layout>
+<style>
+	header {
+		text-align: center;
+
+		& img {
+			width: 3rem;
+			aspect-ratio: 1 / 1;
+			object-fit: cover;
+			border-radius : 50px;
+		}
+
+		& .headerContent {
+			& h1 {
+				font-size: x-large;
+				margin-bottom: -.1rem;
+			}
+
+			& .headerLinks {
+				& a {
+					color: darkgrey;
+					text-decoration: none;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+	main section {
+		& h1 {
+			font-size: larger;
+			text-align: center;
+		}
+
+		& a {
+			color: darkgrey;
+		}
+		
+		& h2 {
+			font-size: 1rem;
+			margin-top: 1rem;
+			text-align: center;
+		}
+
+		& h3 {
+			font-size: 0.9rem; 
+			margin-left: 1rem;
+		}
+	}
+
+	.profil a:hover {
+		color: grey;
+	}
+
+	main .Expériences {
+		margin-top: 3rem;
+		display: grid;
+    	grid-template-columns: repeat(2, 1fr);
+    	grid-template-rows: repeat(2, 1fr);
+    	gap: 16px;
+		
+		& div {
+
+			border: 1px solid rgb(0, 0, 0);
+			border-radius: 25px;
+			
+    		width: 100%;
+    		transition: transform 0.1s;
+		}
+
+		}
+	
+	h1 {
+			font-size: larger;
+			text-align: center;
+		}
+		
+		.Expériences div:hover {
+    	transform: scale(1.02);
+}
+</style>

@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const posts = await getCollection("veille")
+---
+
+<Layout>
+    {posts.map((item) => (
+        <div><a href={`/veille/${item.id}`}>{item.data.title}</a></div>
+    ))}
+</Layout>
