@@ -2,11 +2,43 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
-const posts = await getCollection("veille")
+const posts = await getCollection("veille");
 ---
 
+<style>
+  .post-list {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: system-ui, sans-serif;
+  }
+
+  .post-item {
+    margin-bottom: 1rem;
+  }
+
+  .post-link {
+    text-decoration: none;
+    color: #0070f3;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .post-link:hover {
+    border-color: #0070f3;
+  }
+</style>
+
 <Layout>
+  <section class="post-list">
     {posts.map((item) => (
-        <div><a href={`/veille/${item.id}`}>{item.data.title}</a></div>
+      <div class="post-item">
+        <a class="post-link" href={`/veille/${item.id}`}>
+          {item.data.title}
+        </a>
+      </div>
     ))}
+  </section>
 </Layout>
