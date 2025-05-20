@@ -84,6 +84,19 @@ const socials = [
 			  </div>
 			</div>
 		  </section>
+		  <section class="Softskill">
+			<h1>Soft Skills</h1>
+			<div class="softskill-grid">
+			  <div class="skill">Esprit d’équipe</div>
+			  <div class="skill">Curiosité</div>
+			  <div class="skill">Autonomie</div>
+			  <div class="skill">Capacité d’adaptation</div>
+			  <div class="skill">Communication</div>
+			  <div class="skill">Gestion du temps</div>
+			  <div class="skill">Sens de l’analyse</div>
+			  <div class="skill">Persévérance</div>
+			</div>
+		  </section>
 	</main>
 </Layout>
 <style>
@@ -206,6 +219,28 @@ const socials = [
   100% {
     transform: translateX(-50%);
   }
+}
+.Softskill {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.softskill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.softskill-grid .skill {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 </style>
