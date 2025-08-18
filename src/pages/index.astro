@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Mail, Github, Linkedin,  } from '@lucide/astro';
+import Header from '../layouts/Header.astro';
 const socials = [
   { label: "LinkedIn", icon: Linkedin, link: "https://www.linkedin.com/in/esteban-rattier-226688342/" },
   { label: "GitHub", icon: Github, link: "https://github.com/Kaz-OS" },
@@ -8,16 +9,7 @@ const socials = [
 ];
 ---
 <Layout>
-	<header>
-		<img src="/MainBefore.jpg" alt="Photo de profil">
-		<div class="headerContent">
-			<h1>~ Esteban Rattier ~ </h1>
-			<div class="headerLinks">
-				<a href="/veille">veille</a>
-				<a href="/ERA_TableauDeSynthese.xlsx">rectorat</a>
-			</div>
-		</div>
-	</header>
+	<Header />
 	<main>
 		<section class="profil">
 			<h1>Profil</h1>
