@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import Header from '../layouts/Header.astro';
 
 const posts = await getCollection("veille");
 ---
@@ -30,6 +31,8 @@ const posts = await getCollection("veille");
     border-color: #0070f3;
   }
 </style>
+
+<Header />
 
 <Layout>
   <section class="post-list">
