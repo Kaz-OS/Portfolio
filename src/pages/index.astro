@@ -1,5 +1,5 @@
 ---
-import { Github, Linkedin, Mail } from "lucide-astro";
+import { Github, Linkedin, Mail } from "@lucide/astro";
 import Header from "../layouts/Header.astro";
 import Layout from "../layouts/Layout.astro";
 const socials = [
@@ -14,10 +14,12 @@ const socials = [
   <main>
     <section class="profil">
       <h1>Profil</h1>
-      <p>Étudiant en informatique. Actuellement à la recherche d'un stage de 5 semaines (du 26 mai au 27 juin 2025) en développement</p>
-      pour valider ma première année de BTS Services Informatiques aux Organisations (SIO).
+      <p>
+        Étudiant en informatique. Actuellement à la recherche d'un stage de 5 semaines (du 26 mai au 27 juin 2025) en développement pour valider ma première année de BTS Services Informatiques aux
+        Organisations (SIO).
+      </p>
     </section>
-    <div class="flex items-center gap-x-2.5">
+    <div class="icones">
       {
         socials.map((social) => (
           <a href={social.link} target="_blank">
@@ -29,7 +31,7 @@ const socials = [
   </main>
   <h1>Expériences</h1>
   <section class="Expériences">
-    <div class="1">
+    <div class="exp exp1">
       <h2>GORON ASSI</h2>
       <h3>Technicien stagiaire</h3>
       <ul>
@@ -37,7 +39,7 @@ const socials = [
         <li>Gestion de réseaux</li>
       </ul>
     </div>
-    <div class="2">
+    <div class="exp exp2">
       <h2>DSEM</h2>
       <h3>Technicien stagiaire</h3>
       <ul>
@@ -45,7 +47,7 @@ const socials = [
         <li>Maintenance d'équipement éléctronique</li>
       </ul>
     </div>
-    <div class="3">
+    <div class="exp exp3">
       <h2>PC Solution 76</h2>
       <h3>Technicien stagiaire</h3>
       <ul>
@@ -53,7 +55,7 @@ const socials = [
         <li>Maintenance d'équipement éléctronique</li>
       </ul>
     </div>
-    <div class="4">
+    <div class="exp exp4">
       <h2>Sery OUEST</h2>
       <h3>Technicien stagiaire</h3>
       <ul>
@@ -110,46 +112,61 @@ const socials = [
 </Layout>
 
 <style>
-  main section {
-    & h1 {
-      font-size: larger;
-      text-align: center;
-    }
-
-    & a {
-      color: darkgrey;
-    }
-
-    & h2 {
-      font-size: 1rem;
-      margin-top: 1rem;
-      text-align: center;
-    }
-
-    & h3 {
-      font-size: 0.9rem;
-      margin-left: 1rem;
-    }
+  main section h1 {
+    font-size: larger;
+    text-align: center;
+  }
+  main section a {
+    color: darkgrey;
+  }
+  main section h2 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  main section h3 {
+    font-size: 0.9rem;
+    margin-left: 1rem;
   }
 
+  .profil {
+    margin-top: 3rem;
+    text-align: center;
+    & p {
+      max-width: 800px;
+    }
+  }
   .profil a:hover {
     color: grey;
   }
 
-  main .Expériences {
+  .icones {
+    margin-top: 1rem;
+    text-align: center;
+    & a {
+      text-decoration: none;
+      color: darkgrey;
+      transition: color 0.3s;
+      &:hover {
+        color: grey;
+      }
+    }
+  }
+
+  .Expériences {
     margin-top: 3rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-auto-rows: auto;
     gap: 16px;
-
-    & div {
-      border: 1px solid rgb(0, 0, 0);
-      border-radius: 25px;
-
-      width: 100%;
-      transition: transform 0.1s;
-    }
+    max-width: 900px;
+    margin-inline: auto;
+  }
+  .Expériences .exp {
+    border: 1px solid #000;
+    border-radius: 25px;
+    padding: 1rem;
+    transition: transform 0.1s;
   }
 
   h1 {
@@ -157,9 +174,10 @@ const socials = [
     text-align: center;
   }
 
-  .Expériences div:hover {
+  .Expériences .exp:hover {
     transform: scale(1.02);
   }
+
   .Hardskill {
     margin-top: 3rem;
     text-align: center;
@@ -200,6 +218,7 @@ const socials = [
       transform: translateX(-50%);
     }
   }
+
   .Softskill {
     margin-top: 3rem;
     text-align: center;
