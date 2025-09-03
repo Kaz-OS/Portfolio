@@ -1,58 +1,52 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
-import Header from '../layouts/Header.astro';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
 
 const posts = await getCollection("veille");
 ---
 
-<Header />
-
 <Layout>
   <div class="veille-container">
-  <h1>Veille : NoSQL</h1>
+    <h1>Veille : NoSQL</h1>
 
-  <h2>Presentation du theme</h2>
-  <p>
-    Le theme de ma veille est <strong>NoSQL</strong>. 
-    Il regroupe les bases de donnees non relationnelles, concues pour repondre aux enjeux du Big Data, 
-    du Cloud et des applications temps reel. 
-    Ce sujet est essentiel car il permet de comprendre les evolutions des systemes de gestion de donnees modernes.
-  </p>
+    <h2>Presentation du theme</h2>
+    <p>
+      Le theme de ma veille est <strong>NoSQL</strong>. Il regroupe les bases de donnees non relationnelles, concues pour repondre aux enjeux du Big Data, du Cloud et des applications temps reel. Ce
+      sujet est essentiel car il permet de comprendre les evolutions des systemes de gestion de donnees modernes.
+    </p>
 
-  <h2>Outils de veille</h2>
-  <ul>
-    <li><strong>Feedly</strong> - agregateur de flux RSS pour suivre les sites specialises</li>
-    <li><strong>Google Alerts</strong> - alertes automatiques par mots-cles ("NoSQL", "MongoDB", "Big Data")</li>
-    <li><em>+ 1 nouvel outil teste chaque mois</em> (ex. Inoreader, Scoop.it, Paper.li...)</li>
-  </ul>
+    <h2>Outils de veille</h2>
+    <ul>
+      <li><strong>Feedly</strong> - agregateur de flux RSS pour suivre les sites specialises</li>
+      <li><strong>Google Alerts</strong> - alertes automatiques par mots-cles ("NoSQL", "MongoDB", "Big Data")</li>
+      <li><em>+ 1 nouvel outil teste chaque mois</em> (ex. Inoreader, Scoop.it, Paper.li...)</li>
+    </ul>
 
-  <h2>Presentation du bornage</h2>
-  <p>
-    La veille se concentre sur l'actualite des bases NoSQL (nouvelles fonctionnalites, comparatifs, 
-    cas d'usage concrets). 
-    Elle exclut volontairement les bases purement relationnelles afin de cibler les innovations specifiques au NoSQL.
-  </p>
+    <h2>Presentation du bornage</h2>
+    <p>
+      La veille se concentre sur l'actualite des bases NoSQL (nouvelles fonctionnalites, comparatifs, cas d'usage concrets). Elle exclut volontairement les bases purement relationnelles afin de cibler
+      les innovations specifiques au NoSQL.
+    </p>
 
-  <h2>Mise en oeuvre</h2>
-  <p>
-    Cette veille me permet de suivre l'evolution des technologies de stockage et de gestion de donnees. 
-    Elle nourrit mes competences en developpement et en architecture logicielle, 
-    et m'aide a mieux comprendre les besoins des entreprises dans le Big Data et le Cloud.
-  </p>
+    <h2>Mise en oeuvre</h2>
+    <p>
+      Cette veille me permet de suivre l'evolution des technologies de stockage et de gestion de donnees. Elle nourrit mes competences en developpement et en architecture logicielle, et m'aide a mieux
+      comprendre les besoins des entreprises dans le Big Data et le Cloud.
+    </p>
 
-  <h2>Mes articles de veille</h2>
-  <section class="post-list">
-    {posts.map((item) => (
-      <div class="post-item">
-        <a class="post-link" href={`/veille/${item.id}`}>
-          {item.data.title}
-        </a>
-      </div>
-    ))}
-  </section>
-</div>
-
+    <h2>Mes articles de veille</h2>
+    <section class="post-list">
+      {
+        posts.map((item) => (
+          <div class="post-item">
+            <a class="post-link" href={`/veille/${item.id}`}>
+              {item.data.title}
+            </a>
+          </div>
+        ))
+      }
+    </section>
+  </div>
 </Layout>
 
 <style>

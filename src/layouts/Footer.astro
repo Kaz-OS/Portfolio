@@ -1,0 +1,198 @@
+---
+import { Github, Linkedin, Mail } from "lucide-astro";
+
+const year = new Date().getFullYear();
+const links = [
+  { label: "Accueil", href: "/" },
+  { label: "Rectorat", href: "/rectorat" },
+];
+const socials = [
+  { label: "GitHub", href: "https://github.com/Kaz-OS", icon: Github },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/esteban-rattier-226688342/", icon: Linkedin },
+  { label: "Mail", href: "mailto:esteban.rattier@campus-la-chataigneraie.org", icon: Mail },
+];
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="bloc brand">
+      <h2 class="nom">Esteban Rattier</h2>
+      <p class="sous-titre">Portfolio BTS SIO</p>
+    </div>
+
+    <nav class="bloc nav" aria-label="Navigation">
+      <h3>Navigation</h3>
+      <ul>
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href}>{l.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Contact remonté ici -->
+    <div class="bloc contact">
+      <h3>Contact</h3>
+      <ul class="contact-list">
+        <li><a href="tel:+33611237382">📞 06 11 23 73 82</a></li>
+        <li><a href="mailto:esteban.rattier@campus-la-chataigneraie.org">✉ esteban.rattier@campus-la-chataigneraie.org</a></li>
+        <li class="dispo">Disponible pour un stage (5 semaines).</li>
+      </ul>
+    </div>
+
+    <div class="bloc reseaux">
+      <h3>Réseaux</h3>
+      <ul>
+        {
+          socials.map((s) => (
+            <li>
+              <a href={s.href} target="_blank" rel="noopener">
+                <s.icon size={18} /> <span>{s.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <span>&copy; {year} Esteban Rattier.</span>
+  </div>
+</footer>
+
+<style>
+  :root {
+    --footer-bg: #ffffff;
+    --footer-border: #e6e8eb;
+    --footer-text: #1d1f22;
+    --footer-muted: #6d737a;
+    --footer-heading: #2d3033;
+    --footer-accent: #1d1f22;
+  }
+
+  .site-footer {
+    margin-top: 4rem;
+    background: var(--footer-bg);
+    border-top: 1px solid var(--footer-border);
+    color: var(--footer-text);
+    font-size: 0.85rem;
+    width: 100%;
+  }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem clamp(1rem, 2vw, 2.5rem) 1.5rem;
+    display: grid;
+    gap: 2rem;
+    /* 4 colonnes si la place le permet, sinon ça wrap proprement */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    align-items: start;
+  }
+
+  /* Retire le span qui faisait descendre le bloc Réseaux */
+  .brand {
+    /* grid-column: span 2;  supprimé */
+    grid-column: auto;
+  }
+
+  @media (max-width: 620px) {
+    .wrap {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  .bloc h3 {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--footer-heading);
+  }
+
+  .nom {
+    margin: 0 0 0.3rem;
+    font-size: 1.15rem;
+  }
+  .sous-titre {
+    margin: 0;
+    font-size: 0.7rem;
+    color: var(--footer-muted);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--footer-text);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0;
+    position: relative;
+    transition: color 0.25s;
+  }
+  a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    width: 0;
+    height: 2px;
+    background: var(--footer-accent);
+    transition: width 0.25s;
+    border-radius: 2px;
+  }
+  a:hover,
+  a:focus-visible {
+    color: var(--footer-accent);
+  }
+  a:hover::after,
+  a:focus-visible::after {
+    width: 100%;
+  }
+
+  .reseaux ul li a svg {
+    color: var(--footer-muted);
+    transition: color 0.2s;
+  }
+  .reseaux ul li a:hover svg {
+    color: var(--footer-accent);
+  }
+
+  .contact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+  }
+  .contact-list a {
+    padding: 0;
+    gap: 0.4rem;
+    font-weight: 500;
+  }
+  .contact-list .dispo {
+    color: var(--footer-muted);
+    margin-top: 0.2rem;
+  }
+
+  .legal {
+    text-align: center;
+    padding: 0.9rem clamp(1rem, 2vw, 2.5rem) 1.2rem;
+    font-size: 0.7rem;
+    color: var(--footer-muted);
+    border-top: 1px solid var(--footer-border);
+  }
+</style>

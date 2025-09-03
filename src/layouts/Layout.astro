@@ -1,5 +1,7 @@
 ---
 import { Font } from "astro:assets";
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
 ---
 
 <!doctype html>
@@ -13,7 +15,9 @@ import { Font } from "astro:assets";
     <title>Esteban Rattier</title>
   </head>
   <body>
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>
 

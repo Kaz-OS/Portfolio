@@ -1,6 +1,5 @@
 ---
 import { Github, Linkedin, Mail } from "lucide-astro";
-import Header from "../layouts/Header.astro";
 import Layout from "../layouts/Layout.astro";
 const socials = [
   { label: "LinkedIn", icon: Linkedin, link: "https://www.linkedin.com/in/esteban-rattier-226688342/" },
@@ -10,7 +9,6 @@ const socials = [
 ---
 
 <Layout>
-  <Header />
   <main>
     <section class="profil">
       <h1>Profil</h1>
@@ -30,42 +28,44 @@ const socials = [
   </main>
   <h1>Expériences</h1>
   <section class="Expériences">
-    <div class="exp exp1">
-      <h2>GORON ASSI</h2>
-      <h3>Technicien stagiaire</h3>
-      <ul>
-        <li>4 semaines</li>
-        <li>Gestion de réseaux</li>
-      </ul>
-    </div>
-    <div class="exp exp2">
-      <h2>DSEM</h2>
-      <h3>Technicien stagiaire</h3>
-      <ul>
-        <li>4 semaines</li>
-        <li>Maintenance d'équipement éléctronique</li>
-      </ul>
-    </div>
-    <div class="exp exp3">
-      <h2>PC Solution 76</h2>
-      <h3>Technicien stagiaire</h3>
-      <ul>
-        <li>8 semaines</li>
-        <li>Maintenance d'équipement éléctronique</li>
-      </ul>
-    </div>
-    <div class="exp exp4">
-      <h2>Sery OUEST</h2>
-      <h3>Technicien stagiaire</h3>
-      <ul>
-        <li>6 semaines</li>
-        <li>Imprimerie numérique</li>
-      </ul>
+    <div class="experience-grid">
+      <div class="experience-card">
+        <h2>GORON ASSI</h2>
+        <p class="role">Technicien stagiaire</p>
+        <ul>
+          <li><strong>Durée:</strong> 4 semaines</li>
+          <li>Gestion de réseaux</li>
+        </ul>
+      </div>
+      <div class="experience-card">
+        <h2>DSEM</h2>
+        <p class="role">Technicien stagiaire</p>
+        <ul>
+          <li><strong>Durée:</strong> 4 semaines</li>
+          <li>Maintenance d'équipement électronique</li>
+        </ul>
+      </div>
+      <div class="experience-card">
+        <h2>PC Solution 76</h2>
+        <p class="role">Technicien stagiaire</p>
+        <ul>
+          <li><strong>Durée:</strong> 8 semaines</li>
+          <li>Maintenance d'équipement électronique</li>
+        </ul>
+      </div>
+      <div class="experience-card">
+        <h2>Sery OUEST</h2>
+        <p class="role">Technicien stagiaire</p>
+        <ul>
+          <li><strong>Durée:</strong> 6 semaines</li>
+          <li>Imprimerie numérique</li>
+        </ul>
+      </div>
     </div>
   </section>
   <section class="Hardskill">
     <h1>Hard Skills</h1>
-    <div class="carousel">
+    <div class="carousel" id="skills-carousel" tabindex="0" aria-label="Carrousel des compétences">
       <div class="carousel-track">
         <div class="skill">HTML</div>
         <div class="skill">CSS</div>
@@ -75,8 +75,11 @@ const socials = [
         <div class="skill">SQL</div>
         <div class="skill">SQL Serveur</div>
         <div class="skill">Github</div>
+        <div class="skill">Linux</div>
+        <div class="skill">WSL</div>
       </div>
     </div>
+    <p class="drag-hint" id="drag-hint" aria-hidden="true">Glissez avec la souris</p>
   </section>
   <section class="Softskill">
     <h1>Soft Skills</h1>
@@ -110,7 +113,152 @@ const socials = [
   </section>
 </Layout>
 
+<script>
+  // Drag horizontal (souris + tactile + pointer)
+  const carousel = document.getElementById("skills-carousel");
+  let isDown = false;
+  let startX: number | undefined;
+  let scrollStart: number | undefined;
+
+  const endDrag = () => {
+    isDown = false;
+    if (carousel) {
+      carousel.classList.remove("dragging");
+    }
+  };
+
+  if (carousel) {
+    carousel.addEventListener("pointerdown", (e) => {
+      isDown = true;
+      startX = e.clientX;
+      scrollStart = carousel.scrollLeft;
+      carousel.classList.add("dragging");
+      carousel.setPointerCapture(e.pointerId);
+    });
+
+    carousel.addEventListener("pointermove", (e) => {
+      if (!isDown || startX === undefined || scrollStart === undefined) return;
+      const dx = e.clientX - startX;
+      carousel.scrollLeft = scrollStart - dx;
+    });
+
+    ["pointerup", "pointercancel", "pointerleave"].forEach((evt) => carousel.addEventListener(evt, endDrag));
+
+    // Molette shift pour scroll horizontal (bonus)
+    carousel.addEventListener(
+      "wheel",
+      (e) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          carousel.scrollLeft += e.deltaY;
+          e.preventDefault();
+        }
+      },
+      { passive: false },
+    );
+
+    // Navigation clavier (flèches)
+    carousel.addEventListener("keydown", (e) => {
+      const step = 120;
+      if (e.key === "ArrowRight") {
+        carousel.scrollBy({ left: step, behavior: "smooth" });
+      }
+      if (e.key === "ArrowLeft") {
+        carousel.scrollBy({ left: -step, behavior: "smooth" });
+      }
+    });
+
+    const hint = document.getElementById("drag-hint");
+    if (carousel) {
+      const hideHint = () => hint && hint.classList.add("hide");
+      carousel.addEventListener("pointerdown", hideHint, { once: true });
+      carousel.addEventListener(
+        "keydown",
+        (e) => {
+          if ((e.key === "ArrowRight" || e.key === "ArrowLeft") && hint) hideHint();
+        },
+        { once: true },
+      );
+    }
+  }
+</script>
+
 <style>
+  /* Variables responsive pour tailles internes */
+  :root {
+    --fs-card-title: clamp(0.95rem, 0.7vw + 0.7rem, 1.25rem);
+    --fs-card-role: clamp(0.75rem, 0.55vw + 0.55rem, 0.95rem);
+    --fs-card-text: clamp(0.7rem, 0.5vw + 0.5rem, 0.85rem);
+    --fs-skill: clamp(0.7rem, 0.55vw + 0.55rem, 0.95rem);
+    --pad-card: clamp(0.8rem, 1.2vw + 0.4rem, 1.4rem);
+    --pad-skill-x: clamp(0.8rem, 1.2vw + 0.3rem, 1.8rem);
+    --pad-skill-y: clamp(0.55rem, 0.8vw + 0.25rem, 0.9rem);
+  }
+
+  /* Expériences (ajustement interne) */
+  .experience-card {
+    padding: var(--pad-card);
+  }
+  .experience-card h2 {
+    font-size: var(--fs-card-title);
+    letter-spacing: 0.5px;
+  }
+  .experience-card .role {
+    font-size: var(--fs-card-role);
+  }
+  .experience-card ul {
+    font-size: var(--fs-card-text);
+    line-height: 1.25;
+    margin-top: 0.25rem;
+    padding-left: 1.05rem;
+  }
+  .experience-card ul li + li {
+    margin-top: 0.25rem;
+  }
+
+  /* Grilles soft / langues / centres d’intérêt */
+  .softskill-grid .skill {
+    font-size: var(--fs-skill);
+    padding: var(--pad-skill-y) var(--pad-skill-x);
+    line-height: 1.15;
+  }
+
+  /* Carousel hard skills (on garde largeur mais ajuste font/padding) */
+  .carousel-track .skill {
+    font-size: var(--fs-skill);
+    padding: var(--pad-skill-y) calc(var(--pad-skill-x) * 1.1);
+    min-width: clamp(90px, 10vw, 140px);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Harmonisation visuelle : même hauteur mentale */
+  .softskill-grid .skill,
+  .carousel-track .skill {
+    font-weight: 600;
+  }
+
+  /* Petits écrans : resserrer */
+  @media (max-width: 520px) {
+    .experience-grid {
+      gap: 0.9rem;
+      padding: 1rem;
+    }
+    .experience-card ul {
+      line-height: 1.2;
+    }
+  }
+
+  /* Très petits écrans : si besoin passer temporairement en 1 colonne (décommente si souhaité) */
+  /*
+@media (max-width: 380px) {
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+}
+*/
+
   main section h1 {
     font-size: larger;
     text-align: center;
@@ -153,28 +301,43 @@ const socials = [
   }
 
   .Expériences {
-    margin-top: 3rem;
+    margin-top: 0rem;
+  }
+
+  .experience-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: auto;
-    gap: 16px;
-    max-width: 900px;
-    margin-inline: auto;
-  }
-  .Expériences .exp {
-    border: 1px solid #000;
-    border-radius: 25px;
-    padding: 1rem;
-    transition: transform 0.1s;
+    gap: 1.2rem; /* augmenté légèrement */
+    max-width: 760px; /* un peu plus large */
+    margin: 0 auto;
+    padding: 1.25rem; /* léger + */
   }
 
-  h1 {
-    font-size: larger;
-    text-align: center;
+  .experience-card {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 18px; /* arrondi légèrement + */
+    padding: 1.25rem 1.4rem; /* plus d’espace interne */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.11);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.35s ease;
+    min-height: 150px; /* donne un peu d’air vertical */
   }
-
-  .Expériences .exp:hover {
-    transform: scale(1.02);
+  .experience-card:hover {
+    transform: translateY(-4px) scale(1.025);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  }
+  .experience-card h2 {
+    font-size: 1.1rem; /* + */
+    margin: 0 0 0.4rem;
+  }
+  .experience-card .role {
+    font-size: 0.85rem; /* + */
+    margin: 0 0 0.6rem;
+  }
+  .experience-card ul {
+    font-size: 0.8rem; /* + */
   }
 
   .Hardskill {
@@ -183,20 +346,32 @@ const socials = [
   }
 
   .carousel {
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     width: 100%;
     max-width: 600px;
     margin: 1rem auto;
     border: 1px solid #ccc;
     border-radius: 20px;
     background-color: #f5f5f5;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+  }
+  .carousel.dragging {
+    cursor: grabbing;
+  }
+  .carousel::-webkit-scrollbar {
+    display: none;
   }
 
   .carousel-track {
-    display: flex;
-    animation: scroll 20s linear infinite;
+    display: inline-flex;
     gap: 1rem;
     padding: 1rem;
+    /* Suppression de l'animation auto:
+       animation: scroll 20s linear infinite; (retiré) */
   }
 
   .skill {
@@ -207,15 +382,7 @@ const socials = [
     padding: 1rem 2rem;
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  @keyframes scroll {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+    user-select: none;
   }
 
   .Softskill {
@@ -239,5 +406,35 @@ const socials = [
     padding: 1rem;
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Ajout animation uniquement Soft Skills / Langues / Centres d’intérêt (pas le carousel) */
+  .Softskill .softskill-grid .skill {
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.3s ease;
+  }
+  .Softskill .softskill-grid .skill:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  .Softskill .softskill-grid .skill:focus-visible {
+    outline: 2px solid #888;
+    outline-offset: 3px;
+  }
+
+  .drag-hint {
+    font-size: 0.7rem;
+    margin-top: 0.3rem;
+    color: #666;
+    opacity: 0.6;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    transition: opacity 0.35s ease;
+    user-select: none;
+  }
+  .carousel.dragging + .drag-hint,
+  .drag-hint.hide {
+    opacity: 0;
   }
 </style>
