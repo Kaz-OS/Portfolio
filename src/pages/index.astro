@@ -63,6 +63,29 @@ const socials = [
       </div>
     </div>
   </section>
+
+  <!-- Section Formation ajoutée -->
+  <section class="Formation">
+    <h1>Formation</h1>
+    <div class="formation-grid">
+      <div class="formation-card">
+        <h2>BTS SIO (2<sup>e</sup> année)</h2>
+        <p class="etab">La Châtaigneraie</p>
+        <p class="annee">2023 - 2025</p>
+      </div>
+      <div class="formation-card">
+        <h2>Bac Pro Systèmes Numériques</h2>
+        <p class="etab">La Châtaigneraie</p>
+        <p class="annee">2020 - 2023</p>
+      </div>
+      <div class="formation-card">
+        <h2>Brevet des collèges</h2>
+        <p class="etab">Collège Henri Laugier</p>
+        <p class="annee">2016 - 2020</p>
+      </div>
+    </div>
+  </section>
+
   <section class="Hardskill">
     <h1>Hard Skills</h1>
     <div class="carousel" id="skills-carousel" tabindex="0" aria-label="Carrousel des compétences">
@@ -70,13 +93,13 @@ const socials = [
         <div class="skill">HTML</div>
         <div class="skill">CSS</div>
         <div class="skill">PHP</div>
+        <div class="skill">Astro</div>
         <div class="skill">C#</div>
         <div class="skill">Python</div>
         <div class="skill">SQL</div>
         <div class="skill">SQL Serveur</div>
         <div class="skill">Github</div>
         <div class="skill">Linux</div>
-        <div class="skill">WSL</div>
       </div>
     </div>
     <p class="drag-hint" id="drag-hint" aria-hidden="true">Glissez avec la souris</p>
@@ -338,6 +361,49 @@ const socials = [
   }
   .experience-card ul {
     font-size: 0.8rem; /* + */
+  }
+
+  .Formation {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .formation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 1.25rem;
+  }
+
+  .formation-card {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 18px;
+    padding: 1.25rem 1.4rem;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.11);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.35s ease;
+    min-height: 110px;
+  }
+  .formation-card:hover {
+    transform: translateY(-4px) scale(1.025);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  }
+  .formation-card h2 {
+    font-size: var(--fs-card-title);
+    margin: 0 0 0.4rem;
+  }
+  .formation-card .etab {
+    font-size: var(--fs-card-role);
+    color: #555;
+    margin-bottom: 0.2rem;
+  }
+  .formation-card .annee {
+    font-size: var(--fs-card-text);
+    color: #777;
   }
 
   .Hardskill {
