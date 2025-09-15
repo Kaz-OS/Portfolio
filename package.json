@@ -9,9 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.4",
-    "lucide-astro": "^0.541.0",
-    "astro": "5.13.2"
+    "@astrojs/mdx": "4.3.5",
+    "astro": "5.13.7",
+    "lucide-astro": "^0.541.0"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
