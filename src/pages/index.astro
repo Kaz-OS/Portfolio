@@ -86,6 +86,30 @@ const socials = [
     </div>
   </section>
 
+  <!-- Section Certifications -->
+  <section class="Certifications">
+    <h1>Certifications</h1>
+    <div class="certif-grid">
+      <article class="certif-card">
+        <img src="/attestations/rgpd.png" alt="Certification RGPD — Règlement général sur la protection des données" loading="lazy" width="300" height="197" />
+        <h3>RGPD</h3>
+      </article>
+
+      <article class="certif-card">
+        <img src="/attestations/Pix.png" alt="Certification Pix — Compétences numériques" loading="lazy" width="512" height="512" />
+        <h3>Pix</h3>
+      </article>
+
+      <article class="certif-card">
+        <img src="/attestations/Anssi.png" alt="Visa de sécurité ANSSI — Agence nationale de la sécurité des systèmes d'information" loading="lazy" width="523" height="252" />
+        <h3>ANSSI</h3>
+      </article>
+    </div>
+    <p class="certif-cta">
+      <a href="/attestations/ERA_Attestation.pdf" target="_blank" rel="noopener noreferrer">Voir l'attestation (PDF)</a>
+    </p>
+  </section>
+
   <section class="Hardskill">
     <h1>Hard Skills</h1>
     <div class="carousel" id="skills-carousel" tabindex="0" aria-label="Carrousel des compétences">
@@ -412,6 +436,60 @@ const socials = [
   .Hardskill {
     margin-top: 3rem;
     text-align: center;
+  }
+
+  /* Certifications */
+  .Certifications {
+    margin-top: 3rem;
+    text-align: center;
+  }
+  .certif-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.25rem;
+  }
+  .certif-card {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 18px;
+    padding: var(--pad-card);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.11);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+  }
+  .certif-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  }
+  .certif-card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    aspect-ratio: auto;
+    filter: saturate(0.95);
+  }
+  .certif-card h3 {
+    font-size: var(--fs-card-role);
+    margin-top: 0.6rem;
+  }
+  .certif-cta {
+    margin-top: 0.25rem;
+  }
+  .certif-cta a {
+    color: #555;
+    text-decoration: underline;
+  }
+  .certif-cta a:hover {
+    color: #333;
   }
 
   .carousel {
